@@ -6,8 +6,10 @@ public class Ej4 {
     static void main() {
         Scanner n = new Scanner(System.in);
 
-        String [] nombres = new String[10];
-        double [] notas = new double[10];
+        int num = 10;
+
+        String [] nombres = new String[num];
+        double [] notas = new double[num];
 
         System.out.println("Introduce los nombres de 10 alumnos: ");
         for (int i = 0; i<nombres.length; i++) {
@@ -21,16 +23,16 @@ public class Ej4 {
             notas[i] = nota;
         }
 
-        String [] letras = new String[10];
+        String [] letras = new String[num];
 
         for (int i = 0; i<letras.length; i++) {
             if (notas[i] >= 0 && notas[i] < 5) {
                 letras[i] = "D";
-            } else if (notas[i] >=5 && notas[i] < 7) {
+            } else if (notas[i] < 7) {
                 letras[i] = "C";
-            } else if (notas[i] >=7 && notas[i] < 9) {
+            } else if (notas[i] < 9) {
                 letras[i] = "B";
-            } else if (notas[i] >=9 && notas[i] <=10) {
+            } else if (notas[i] <=10) {
                 letras[i] = "A";
             }
         }

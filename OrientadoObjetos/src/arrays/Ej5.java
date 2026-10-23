@@ -9,7 +9,7 @@ public class Ej5 {
         int mayor = Integer.MIN_VALUE;
 
         int [] a1 = new int[5];
-        int [] aF = new int[5];
+        int [] a2 = new int[5];
 
         System.out.println("Introduce 5 números enteros: ");
         for (int i = 0; i<a1.length; i++) {
@@ -17,14 +17,16 @@ public class Ej5 {
             a1[i] = num;
         }
 
-        for (int i = 0; i<aF.length; i++) {
-            for (int j = 0; j<aF.length; j++) {
-                if (a1[j] > mayor) {
-                    mayor = a1[i];
-                }
-            }
-            aF[i] = a1[i];
-            System.out.print(aF[i] + " ");
+        int n1 = a2.length;
+        for (int i = 0; i<a2.length; i++) {
+            a2[i] = a1[n1-1-i];
         }
+
+        for (int i = 0; i<a2.length; i++) {
+            System.out.print(a2[i] + " ");
+        }
+        System.out.println();
+
+        n.close();
     }
 }
