@@ -15,5 +15,7 @@ public class Ej1 {
         for (int i =0; i<array.length; i++) {
             System.out.println("En la posición " + i + " está el valor " + array[i]);
         }
+
+        n.close();
     }
 }

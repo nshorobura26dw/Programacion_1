@@ -18,5 +18,7 @@ public class Ej2 {
 
         media = (double) suma / (array.length);
         System.out.println("La suma de los elementos es " + suma + " y la media es " + media);
+
+        n.close();
     }
 }
