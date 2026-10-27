@@ -1,4 +1,4 @@
-package arrays;
+package arrays_pdf2;
 
 public class ArraysBorrador {
     public static int suma(int x, int y) {

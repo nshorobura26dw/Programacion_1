@@ -1,4 +1,4 @@
-package arrays;
+package arrays_pdf2;
 
 import java.util.Scanner;
 
