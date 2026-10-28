@@ -14,23 +14,22 @@ public class Ej2 {
             numeros[i] = num;
         }
 
-        int [] array2 = new int[10];
+        //n = 10
+        //0 - 9
+        //1 - 8
+        //2 - 7
+        //3 - 6
+        //10-1-i(0)
+        //10-1-i(1)
 
-        int pos1 = 0;
-        int pos2 = numeros.length -1;
-
-        for (int i = 0; i<numeros.length; i++) {
-            if (i == 0 || i % 2 == 0) {
-                array2[pos1] = numeros[i];
-                pos1++;
+        for (int i = 0; i < numeros.length/2; i++) {
+            System.out.print(numeros[i]+" - ");
+            if (i == ((numeros.length/2)-1)) {
+                System.out.print(numeros[numeros.length - i - 1]);
             } else {
-                array2[pos1] = numeros[pos2];
-                pos2--;
+                System.out.print(numeros[numeros.length - i - 1] + " - ");
             }
         }
-
-        for (int i = 0; i < array2.length; i++) {
-            System.out.print(array2[i] + " - ");
-        }
+        n.close();
     }
 }
