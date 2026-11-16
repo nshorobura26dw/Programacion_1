@@ -17,7 +17,7 @@ public class Ej7V2 {
 
         int [] array = new int[log];
         for (int i = 0; i<array.length; i++) {
-            array[i] = (int) (Math.random()*20+1);
+            array[i] = (int) (Math.random()*21);
         }
         mostrar(array);
         System.out.println();
