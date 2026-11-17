@@ -3,125 +3,112 @@ package Matrices;
 import java.util.Scanner;
 
 public class Ej12 {
-    public static int registrar(String[] nombres, double[][] marcas, int num, Scanner n) {
-        if (num >= nombres.length) {
-            System.out.println("Error: No se pueden registrar más de 10 participantes.");
-            return num;
-        }
-
-        System.out.println("Introduce el nombre de participante: ");
-        nombres[num] = n.nextLine();
-
-        System.out.println("Introduce la marca del participante 2020: ");
-        marcas[num][0] = n.nextDouble();
-
-        System.out.println("Introduce la marca del participante 2021: ");
-        marcas[num][1] = n.nextDouble();
-
-        System.out.println("Introduce la marca del participante 2022: ");
-        marcas[num][2] = n.nextDouble();
-        n.nextLine();
-
-        System.out.println();
-        return num + 1;
+    public static void mostraMenu() {
+        System.out.println("1. Registrar participante");
+        System.out.println("2. Mostrar datos");
+        System.out.println("3. Ver las puntuaciones");
+        System.out.println("4. Salir");
     }
 
-    public static void mostrarDatos(String[] nombres, double[][] marcas, int num) {
-        if (num == 0) {
-            System.out.println("No hay participantes registrados.");
-            return;
+    public static void imprimirArray(String[] array) {
+        for(int i=0; i<array.length; i++) {
+            System.out.print(array[i] + " ");
         }
-
-        System.out.println("********* Todos los datos *********");
         System.out.println();
-        for (int i = 0; i<num; i++) {
-            System.out.println("Participante: " + nombres[i]);
-            System.out.println("    la marca del 2020 es: " + marcas[i][0]);
-            System.out.println("    la marca del 2021 es: " + marcas[i][1]);
-            System.out.println("    la marca del 2022 es: " + marcas[i][2]);
+    }
+
+    public static void imprimirMatriz(double[][] m) {
+        for(int i=0; i<m.length; i++) {
+            for (int j=0; j<m[i].length; j++) {
+                System.out.print(m[i][j] +  " ");
+            }
             System.out.println();
         }
-        System.out.println("***********************************");
     }
 
-    public static void mejoresMarcas(String[] nombres, double[][] marcas, int num) {
-        if (num == 0) {
-            System.out.println("No hay participantes registrados.");
-            return;
-        }
+    public static void mostrarDatos(double[][] puntuaciones,
+                                    String[] nombres) {
+        int i=0;
+        int[] anyos = {2023, 2024, 2025};
+        while (i<puntuaciones.length && nombres[i]!=null) {
+            System.out.println("Participante: " + nombres[i]);
 
-        System.out.println("Cantidad " + num);
-        System.out.println("********* Mejores marcas *********");
-
-        String[] nombresAux = new String[num];
-        double[] marcas2022Aux = new double[num];
-
-        for (int i = 0; i < num; i++) {
-            nombresAux[i] = nombres[i];
-            marcas2022Aux[i] = marcas[i][2];
-        }
-
-        for (int i = 0; i < num - 1; i++) {
-            for (int j = 0; j < num - 1; j++) {
-                if (marcas2022Aux[j] < marcas2022Aux[j + 1]) {
-                    double tempMarca = marcas2022Aux[j];
-                    marcas2022Aux[j] = marcas2022Aux[j + 1];
-                    marcas2022Aux[j + 1] = tempMarca;
-
-                    String tempNombre = nombresAux[j];
-                    nombresAux[j] = nombresAux[j + 1];
-                    nombresAux[j + 1] = tempNombre;
-                }
+            for (int j=0; j<3; j++) {
+                System.out.println("\tLa marca del " + anyos[j] + " es: " +
+                        puntuaciones[i][j]);
             }
+
+            i++;
         }
-        for (int i = 0; i < num; i++) {
-            System.out.println(nombresAux[i] + " - " + marcas2022Aux[i]);
-        }
-        System.out.println("***********************************");
     }
 
-    public static boolean completar(int opcion) {
-        if (opcion == 4) {
-            System.out.println("El programa ha finalizado");
-            return false;
+    public static void registrarParticipante(double[][] puntuaciones,
+                                           String[] nombres, Scanner sc) {
+        System.out.println("Nombre:");
+        String nombre = sc.next();
+        System.out.println("Puntuacion1");
+        double p1 = sc.nextDouble();
+        System.out.println("Puntuacion2");
+        double p2 = sc.nextDouble();
+        System.out.println("Puntuacion3");
+        double p3 = sc.nextDouble();
+
+        int pos = 0;
+        while (nombres[pos]!=null && pos<nombres.length) {
+            pos++;
         }
-        return true;
+        nombres[pos] = nombre;
+        puntuaciones[pos][0] = p1;
+        puntuaciones[pos][1] = p2;
+        puntuaciones[pos][2] = p3;
+    }
+
+    public static void verMejoresPuntuaciones(double[][] puntuaciones,
+                                              String[] nombres) {
+        int i=0;
+        while (i<puntuaciones.length && nombres[i]!=null) {
+            double max = Double.MIN_VALUE;
+
+            for (int j=0; j<3; j++) {
+               if (puntuaciones[i][j]>max) {
+                   max = puntuaciones[i][j];
+               }
+            }
+            System.out.println(nombres[i] + " - " +max);
+
+            i++;
+        }
     }
 
     static void main() {
-        Scanner n = new Scanner(System.in);
-
-        String[] participantes = new String[10];
-        double[][] marcas = new double[10][3];
-
-        int numParticipantes = 0;
-        boolean continuar = true;
-
-        while(continuar) {
-            System.out.println("Elige una opción: \n1. Registrar un participante " +
-                    "\n2. Mostrar datos \n3. Mostrar mejores marcas" +
-                    "\n4. Finalizar programa");
-            int opcion = n.nextInt();
-            n.nextLine();
-
+        Scanner sc = new Scanner(System.in);
+        mostraMenu();
+        int opcion = sc.nextInt();
+        double[][] puntuaciones = new double[10][3];
+        String[] nombres = new String[10];
+        while (opcion!=4) {
             switch (opcion) {
                 case 1:
-                    numParticipantes = registrar(participantes, marcas, numParticipantes, n);
+                    registrarParticipante(puntuaciones, nombres, sc);
+                    System.out.println("Caso 1");
+                    imprimirArray(nombres);
+                    imprimirMatriz(puntuaciones);
                     break;
                 case 2:
-                    mostrarDatos(participantes, marcas, numParticipantes);
+                    mostrarDatos(puntuaciones, nombres);
                     break;
                 case 3:
-                    mejoresMarcas(participantes, marcas, numParticipantes);
-                    break;
-                case 4:
-                    continuar = completar(opcion);
+                    verMejoresPuntuaciones(puntuaciones, nombres);
                     break;
                 default:
-                    System.out.println("Opción no válida.");
+                    System.out.println("Opción no valida");
             }
-            System.out.println();
+
+            mostraMenu();
+            opcion = sc.nextInt();
         }
-        n.close();
+        System.out.println("Adiós");
+
+        sc.close();
     }
 }
